@@ -17,3 +17,5 @@ docker-compose up -d
 ```
 
 服务启动在6842端口
+
+模型的pt文件默认位置在`docker-compose.yml`文件里修改
