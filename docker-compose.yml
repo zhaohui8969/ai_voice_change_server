@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  backend:
+    image: ai_voice_change_server:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0']
+            capabilities: [gpu]
+    restart: unless-stopped
+    volumes:
+      - /tmp/ai_voice_change_server/wav_temp/input:/code/wav_temp/input:rw
+      - /tmp/ai_voice_change_server/wav_temp/output:/code/wav_temp/output:rw
+      - /tmp/ai_voice_change_server/results:/code/results:rw
+      - /tmp/ai_voice_change_server/raw:/code/raw:rw
+      - /home/natas/pool1/ai/models/sovits/20221005:/code/pt_model:ro
+    ports:
+      - 6842:6842
